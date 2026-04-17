@@ -12,10 +12,4 @@ def remove_substrings(text, to_replace, replace_with=""):
         replace_with (str): defaults to an empty string but
             you replace substrings with a token.
     """
-    if isinstance(to_replace, str):
-        to_replace = [to_replace]
-
-    result = text
-    for x in to_replace:
-        result = result.replace(x, replace_with)
-    return result
+    pass

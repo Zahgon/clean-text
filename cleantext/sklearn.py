@@ -86,13 +86,13 @@ class CleanTransformer(TransformerMixin, BaseEstimator):
         """
         This method is defined for compatibility. It does nothing.
         """
-        return self
+        pass
 
     def partial_fit(self, X: Any, y=None):
         """
         This method is defined for compatibility. It does nothing.
         """
-        return self
+        pass
 
     def transform(self, X: Union[list[str], pd.Series]) -> Union[list[str], pd.Series]:
         """
@@ -103,12 +103,7 @@ class CleanTransformer(TransformerMixin, BaseEstimator):
             array-like[str]: an array-like with the same type as ``X``
                              and with the processed items of ``X`` as content.
         """
-        if not (isinstance(X, list) or isinstance(X, pd.Series)):
-            raise ValueError("The input must be a list or pd.Series")
-        if isinstance(X, pd.Series):
-            return X.apply(lambda text: clean(text, **self.get_params()))
-        else:
-            return list(map(lambda text: clean(text, **self.get_params()), X))
+        pass
 
     def get_feature_names_out(self, feature_names_out=None):
         """
@@ -119,4 +114,4 @@ class CleanTransformer(TransformerMixin, BaseEstimator):
         Returns:
             list[str]: List with one element (i.e. The cleaned text column).
         """
-        return ["Clean Text"]
+        pass

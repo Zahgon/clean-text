@@ -408,18 +408,7 @@ def _resolve_n_jobs(n_jobs):
     * ``0``             → raises ``ValueError``
     * positive int      → used as-is
     """
-    if n_jobs is None:
-        return 1
-    if not isinstance(n_jobs, int):
-        raise TypeError(f"n_jobs must be an integer or None, got {type(n_jobs).__name__}")
-    if n_jobs == 0:
-        raise ValueError("n_jobs must not be 0")
-    if n_jobs < 0:
-        cpu_count = os.cpu_count() or 1
-        if n_jobs == -1:
-            return cpu_count
-        return max(1, cpu_count + 1 + n_jobs)
-    return n_jobs
+    pass
 
 
 def clean_texts(
@@ -471,46 +460,4 @@ def clean_texts(
     Returns:
         list[str]: cleaned texts in the same order as *texts*.
     """
-    texts = list(texts)
-    n_jobs = _resolve_n_jobs(n_jobs)
-
-    kwargs = dict(
-        fix_unicode=fix_unicode,
-        to_ascii=to_ascii,
-        lower=lower,
-        normalize_whitespace=normalize_whitespace,
-        no_line_breaks=no_line_breaks,
-        strip_lines=strip_lines,
-        keep_two_line_breaks=keep_two_line_breaks,
-        no_code=no_code,
-        no_urls=no_urls,
-        no_emails=no_emails,
-        no_phone_numbers=no_phone_numbers,
-        no_ip_addresses=no_ip_addresses,
-        no_file_paths=no_file_paths,
-        no_numbers=no_numbers,
-        no_digits=no_digits,
-        no_currency_symbols=no_currency_symbols,
-        no_punct=no_punct,
-        no_emoji=no_emoji,
-        replace_with_code=replace_with_code,
-        replace_with_url=replace_with_url,
-        replace_with_email=replace_with_email,
-        replace_with_phone_number=replace_with_phone_number,
-        replace_with_ip_address=replace_with_ip_address,
-        replace_with_file_path=replace_with_file_path,
-        replace_with_number=replace_with_number,
-        replace_with_digit=replace_with_digit,
-        replace_with_currency_symbol=replace_with_currency_symbol,
-        replace_with_punct=replace_with_punct,
-        lang=lang,
-        exceptions=exceptions,
-    )
-
-    worker = partial(clean, **kwargs)
-
-    if n_jobs == 1 or len(texts) == 0:
-        return [worker(t) for t in texts]
-
-    with Pool(processes=min(n_jobs, len(texts))) as pool:
-        return pool.map(worker, texts)
+    pass
